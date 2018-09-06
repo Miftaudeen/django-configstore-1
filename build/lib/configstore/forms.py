@@ -1,8 +1,8 @@
 from django import forms
 from django.core.files.base import File
-# import json
-# from django.contrib.sites.models import Site
-# from django.core.serializers.json import DjangoJSONEncoder
+import json
+from django.contrib.sites.models import Site
+from django.core.serializers.json import DjangoJSONEncoder
 
 from .fields import FieldFile
 from .models import Configuration

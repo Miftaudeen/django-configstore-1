@@ -1,6 +1,5 @@
 from django.contrib.sites.models import Site
-from django.db import ProgrammingError
-# from .settings import SITE_ID
+from settings import SITE_ID
 from .models import Configuration
 
 import threading
@@ -27,7 +26,7 @@ class ConfigurationInstance(object):
         try:
             Site.objects.clear_cache()
             configuration = Configuration.objects.get(key=self.key, site=Site.objects.get_current())
-        except Configuration.DoesNotExist or Exception or ProgrammingError:
+        except Configuration.DoesNotExist or Exception:
             return {}
         else:
             return configuration.data

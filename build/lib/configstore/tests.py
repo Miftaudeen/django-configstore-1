@@ -1,10 +1,9 @@
 from django.test import TestCase
-# from django.core import urlresolvers
+from django.core import urlresolvers
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 from django import forms
 from django.template import Template, Context
-from django.urls import reverse
 
 from .configs import ConfigurationInstance, register, get_config, CONFIG_CACHE
 from .forms import ConfigurationForm
@@ -57,14 +56,14 @@ class ConfigStoreTest(TestCase):
 
     def test_configstore_admin(self):
         self.login()
-        self.client.get(reverse('admin:configstore_configuration_add'))
-        self.client.get(reverse('admin:configstore_configuration_add'), data={'key':'test'})
-        self.client.get(reverse('admin:configstore_configuration_changelist'))
+        self.client.get(urlresolvers.reverse('admin:configstore_configuration_add'))
+        self.client.get(urlresolvers.reverse('admin:configstore_configuration_add'), data={'key':'test'})
+        self.client.get(urlresolvers.reverse('admin:configstore_configuration_changelist'))
 
     def test_congistore_admin_handles_unknown_keys(self):
         Configuration(key='unknown-key', site=Site.objects.get_current()).save()
         self.login()
-        self.client.get(reverse('admin:configstore_configuration_changelist'))
+        self.client.get(urlresolvers.reverse('admin:configstore_configuration_changelist'))
 
     def test_complex_config(self):
         form_builder = self.complex_instance.get_form_builder()
